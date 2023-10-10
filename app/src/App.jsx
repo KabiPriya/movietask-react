@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import AddMovie from './components/Addmovie';
 import Home from './components/Home';
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -16,7 +17,7 @@ function App() {
   }, []);
 
   const handleAddMovie = (newMovie) => {
-    const updatedMovies = [...movies, newMovie];
+    const updatedMovies = [{ id: uuidv4(), ...newMovie }, ...movies];
     setMovies(updatedMovies);
     // Save the updated movies to local storage
     localStorage.setItem('movies', JSON.stringify(updatedMovies));

@@ -28,12 +28,23 @@ function Home({ movies }) {
         <button onClick={handleSearch}>Search</button>
       </div>
       <div className="movie-cards">
-        {filteredMovies.map((movie, index) => (
-          <div className="movie-card" key={index}>
+        {filteredMovies.map((movie) => (
+          <div className="movie-card" key={movie.id}> {/* Add key prop */}
             <img src={movie.image} alt={movie.title} />
             <h3>{movie.title}</h3>
             <p>Year: {movie.year}</p>
-            <p>Rating: {movie.rating}</p>
+            <div className="star-rating">
+              {Array.from({ length: Number(movie.rating) }, (_, index) => (
+                <span key={index} className="star gold">
+                  &#9733;
+                </span>
+              ))}
+              {Array.from({ length: 5 - Number(movie.rating) }, (_, index) => (
+                <span key={index} className="star">
+                  &#9733;
+                </span>
+              ))}
+            </div>
           </div>
         ))}
       </div>
